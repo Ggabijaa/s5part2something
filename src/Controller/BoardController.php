@@ -14,16 +14,18 @@ class BoardController extends AbstractController
      * @return Response
      * @Route("/")
      */
-    public function home(){
+    public function home()
+    {
         return new Response('dadam');
     }
 
     /**
      * @Route("/boards/{name}")
      */
-    public function showBoard($name){
+    public function showBoard($name)
+    {
 
-        $tasks =[
+        $tasks = [
             'task 1', 'task 2', 'task 3'
         ];
 
