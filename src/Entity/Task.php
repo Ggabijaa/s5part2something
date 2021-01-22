@@ -4,12 +4,17 @@ namespace App\Entity;
 
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
  */
 class Task
 {
+    public const STATUS_COMPLETED = 'completed';
+    public const STATUS_IN_PROGRESS = 'in progress';
+    public const STATUS_NOT_STARTED = 'not started';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -19,11 +24,13 @@ class Task
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $status;
 
@@ -53,7 +60,6 @@ class Task
         return $this->id;
     }
 
-
     public function getTitle(): ?string
     {
         return $this->title;
@@ -65,6 +71,7 @@ class Task
 
         return $this;
     }
+
 
     public function getStatus(): ?string
     {
@@ -124,5 +131,14 @@ class Task
         $this->category = $category;
 
         return $this;
+    }
+
+    public function getStatuses(): array
+    {
+        return [
+            self::STATUS_COMPLETED,
+            self::STATUS_IN_PROGRESS,
+            self::STATUS_NOT_STARTED,
+        ];
     }
 }
