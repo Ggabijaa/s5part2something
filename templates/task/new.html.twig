@@ -1,1 +1,7 @@
-{{ form(form) }}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <form style="width: 30%; margin: 0 auto;">
+        {{ form(form) }}
+        {# form_row(form.title, {label_attr: {class: 'radio-custom'} }) #}
+    </form>
+{% endblock %}

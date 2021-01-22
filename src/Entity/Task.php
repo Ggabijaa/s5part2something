@@ -141,4 +141,9 @@ class Task
             self::STATUS_NOT_STARTED,
         ];
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }

@@ -15,34 +15,30 @@ class CategoryController extends AbstractController
 {
     /**
      * @Route("/create-category", name="category")
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
         // creates a task object and initializes some data for this example
         $category = new Category();
-        $form = $this->createFormBuilder($category)
-            ->add('name', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Create Task'])
-            ->getForm();
 
         $form = $this->createForm(CategoryType::class, $category);
 
-        return $this->render('category/new.html.twig', [
-            'form' =>$form->createView(),
-        ]);
+        $form->handleRequest($request);
 
-        $form = handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
+
+            return $this->redirect('/');
         }
 
-        return $this->render('category/new.html.twig',[
-            'form'=>$form->createView()
+        return $this->render('category/new.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
