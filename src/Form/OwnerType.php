@@ -15,7 +15,7 @@ class OwnerType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Create Task'])
+            ->add('save', SubmitType::class, ['label' => 'Create User'])
             ->getForm();;
     }
 
