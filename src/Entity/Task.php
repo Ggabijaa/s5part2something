@@ -55,6 +55,11 @@ class Task
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Board::class, inversedBy="tasks")
+     */
+    private $board;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -145,5 +150,17 @@ class Task
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getBoard(): ?Board
+    {
+        return $this->board;
+    }
+
+    public function setBoard(?Board $board): self
+    {
+        $this->board = $board;
+
+        return $this;
     }
 }

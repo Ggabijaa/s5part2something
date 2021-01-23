@@ -36,8 +36,12 @@ class TaskType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
             ])
-            ->add('timeSpent', DateType::class)
-            ->add('startDate', DateType::class)
+            ->add('timeSpent', DateType::class, [
+                'widget' => 'single_text'
+            ])
+            ->add('startDate', DateType::class, [
+                'widget' => 'single_text'
+            ])
             ->add('save', SubmitType::class, ['label' => 'Create Task']);
     }
 

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="UTF-8">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Tasks <span class="sr-only"></span></a>
+                <a class="nav-item nav-link active" href="/boards/gg">Tasks <span class="sr-only"></span></a>
                 <a class="nav-item nav-link" href="/create-category">New category</a>
-                <a class="nav-item nav-link" href="#">New task</a>
-                <a class="nav-item nav-link" href="#">New owner</a>
+                <a class="nav-item nav-link" href="/create-task">New task</a>
+                <a class="nav-item nav-link" href="/create-user">New user</a>
             </div>
         </div>
 
@@ -20,11 +21,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
     {% block stylesheets %}{% endblock %}
 
     {% block javascripts %}{% endblock %}
 </head>
-<body>
+<body style="background-color: #F5F5F5 ">
 {% block body %}{% endblock %}
 </body>
 </html>

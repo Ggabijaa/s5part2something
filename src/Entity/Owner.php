@@ -29,9 +29,15 @@ class Owner
      */
     private $tasks;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Board::class, mappedBy="users")
+     */
+    private $boards;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->boards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,5 +89,32 @@ class Owner
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Board[]
+     */
+    public function getBoards(): Collection
+    {
+        return $this->boards;
+    }
+
+    public function addBoard(Board $board): self
+    {
+        if (!$this->boards->contains($board)) {
+            $this->boards[] = $board;
+            $board->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoard(Board $board): self
+    {
+        if ($this->boards->removeElement($board)) {
+            $board->removeUser($this);
+        }
+
+        return $this;
     }
 }

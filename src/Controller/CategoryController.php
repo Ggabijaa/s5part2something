@@ -20,6 +20,7 @@ class CategoryController extends AbstractController
      */
     public function new(Request $request): Response
     {
+
         // creates a task object and initializes some data for this example
         $category = new Category();
 
