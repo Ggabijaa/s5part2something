@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Board;
 use App\Entity\Category;
 use App\Entity\Owner;
 use App\Entity\Task;
@@ -24,6 +25,10 @@ class TaskType extends AbstractType
             ->add('title', TextType::class)
             ->add('owner', EntityType::class, [
                 'class' => Owner::class,
+                'choice_label' => 'name',
+            ])
+            ->add('board', EntityType::class, [
+                'class' => Board::class,
                 'choice_label' => 'name',
             ])
             ->add('status', ChoiceType::class, [
