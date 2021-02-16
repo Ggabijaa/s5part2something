@@ -19,7 +19,7 @@ class UserController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        // creates a task object and initializes some data for this example
+        // creates a new_task object and initializes some data for this example
         $owner = new Owner();
 
         $form = $this->createForm(OwnerType::class, $owner);
@@ -28,10 +28,10 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $owner = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($owner);
             $em->flush();
+
             return $this->redirect('/');
         }
 

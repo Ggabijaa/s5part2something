@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Board;
 use App\Entity\Task;
+use App\Repository\BoardRepository;
+use App\Repository\OwnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,14 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomePageController extends AbstractController
 {
     /**
-     * @Route("/boards", name="home_page")
+     * @Route("/{userId}/boards", name="home_page")
      */
-    public function showBoards()
+    public function showBoard(int $userId, BoardRepository $boardRepository, OwnerRepository $ownerRepository)
     {
-        $repository = $this->getDoctrine()->getRepository(Board::class);
-        $boards = $repository->findAll();
+        $board = $boardRepository->findBy( ['id' => $userId]);
+        $owner = $ownerRepository->findOneBy(['id' => $userId]);
+
+        $owner->getName();
         return $this->render('home_page/boards.html.twig', [
-            'boards' => $boards,
+            'boards' => $board,
+            'users' => $owner
         ]);
     }
 }

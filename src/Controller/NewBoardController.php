@@ -20,7 +20,7 @@ class NewBoardController extends AbstractController
     public function new(Request $request): Response
     {
 
-        // creates a task object and initializes some data for this example
+        // creates a new_task object and initializes some data for this example
         $board = new Board();
 
         $form = $this->createForm(BoardType::class, $board);

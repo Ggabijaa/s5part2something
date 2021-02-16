@@ -47,7 +47,8 @@ class TaskType extends AbstractType
             ->add('startDate', DateType::class, [
                 'widget' => 'single_text'
             ])
-            ->add('save', SubmitType::class, ['label' => 'Create Task']);
+            ->add('save', SubmitType::class, ['label' => 'Create Task'])
+            ->setMethod('GET');
     }
 
     public function configureOptions(OptionsResolver $resolver)

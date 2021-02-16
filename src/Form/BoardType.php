@@ -32,6 +32,7 @@ class BoardType extends AbstractType
                 'choice_label' => 'title'
             ])
             ->add('save', SubmitType::class, ['label' => 'Create Board'])
+            ->setMethod('GET')
             ->getForm();
         ;
     }

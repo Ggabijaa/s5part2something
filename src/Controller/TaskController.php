@@ -25,7 +25,7 @@ class TaskController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        // creates a task object and initializes some data for this example
+        // creates a new_task object and initializes some data for this example
         $task = new Task();
 
         $form = $this->createForm(TaskType::class, $task);
@@ -42,7 +42,7 @@ class TaskController extends AbstractController
             return $this->redirect('/');
         }
 
-        return $this->render('task/new.html.twig', [
+        return $this->render('new_task/new.html.twig', [
             'form' => $form->createView(),
 
         ]);

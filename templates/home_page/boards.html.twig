@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {% block title %} USER BOARDS{% endblock %}
+    {% block title %} <h1>{{ users }} Boards </h1> {% endblock %}
+
+    <a class="btn btn-primary" href="/create-board" role="button">Add new board</a>
 
     <table class="table table-striped table-bordered" style="width: 60%; margin: 0 auto;">
         <tr>
-            <th scope="col" style="width: 20%;">No</th>
-            <th scope="col" style="width: 10%;">owner</th>
+            <th scope="col" style="width: 10%;">No</th>
+            <th scope="col" style="width: 30%;">owner</th>
             <th scope="col" style="width: 60%;">title</th>
 
         </tr>
         {% for board in boards %}
-            <tr data-href="/boards/{board.id}" style="cursor:pointer;">
-                <td>{{ board.id }}dff</td>
-                <td>{{ board.owner }}dfdfd</td>
-                <td>{{ board.name }}fdfdf</td>
+            {#<tr data-href="/tasks/{board.id}" style="cursor:pointer;">#}
+            <td><a href="/board/{{ board.id }}">{{ board.id }}</a></td>
+            <td>{% for user in board.users %} {{ user }} {% endfor %}</td>
+            <td>{{ board.name }}</td>
 
             </tr>
         {% endfor %}

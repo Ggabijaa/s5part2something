@@ -25,7 +25,7 @@ class Board
     private $tasks;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Owner::class, inversedBy="boards")
+     * @ORM\ManyToMany(targetEntity=Owner::class, inversedBy="tasks")
      */
     private $users;
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,10 +19,10 @@ class CategoryController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
 
-        // creates a task object and initializes some data for this example
+        // creates a new_task object and initializes some data for this example
         $category = new Category();
 
         $form = $this->createForm(CategoryType::class, $category);
@@ -38,8 +39,11 @@ class CategoryController extends AbstractController
             return $this->redirect('/');
         }
 
+        $categories = $categoryRepository->findAll();
+
         return $this->render('category/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'categories' => $categories,
         ]);
     }
 }

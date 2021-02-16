@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {% block title %}{% endblock %}
-
+    <a class="btn btn-primary" href="/create-task" role="button">Add new task</a>
     <table class="table table-striped table-bordered" style="width: 60%; margin: 0 auto;">
         <tr>
+            <th scope="col" style="width: 20%;">id</th>
             <th scope="col" style="width: 20%;">category</th>
             <th scope="col" style="width: 10%;">owner</th>
             <th scope="col" style="width: 60%;">title</th>
             <th scope="col" style="width: 10%;">status</th>
         </tr>
-        {% for task in tasks %}
+        {% for task in board.tasks %}
             <tr>
+                <td>{{ task.id }}</td>
                 <td>{{ task.category }}</td>
                 <td>{{ task.owner }}</td>
                 <td>{{ task.title }}</td>
