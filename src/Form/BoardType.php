@@ -23,12 +23,12 @@ class BoardType extends AbstractType
             ->add('users', EntityType::class, [
                 'class' => Owner::class,
                 'multiple' => true,
-                'expanded' => true,
+               // 'expanded' => true,
             ])
             ->add('tasks', EntityType::class, [
                 'class' => Task::class,
                 'multiple' => true,
-                'expanded' => true,
+                //'expanded' => true,
                 'choice_label' => 'title'
             ])
             ->add('save', SubmitType::class, ['label' => 'Create Board'])
