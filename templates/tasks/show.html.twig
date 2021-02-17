@@ -2,7 +2,7 @@
 {% block body %}
     {% block title %} <h1>{{ board.name }}</h1>{% endblock %}
     <a class="btn btn-primary" href="/edit-board/{{board.id}}" role="button">Edit board</a>
-    <a class="btn btn-primary" href="/create-task" role="button">Add new task</a>
+    <a class="btn btn-primary" href="/{{board.id}}/create-task" role="button">Add new task</a>
 {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}

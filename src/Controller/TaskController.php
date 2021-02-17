@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Board;
 use App\Entity\Category;
 use App\Entity\Owner;
 use App\Entity\Task;
@@ -18,12 +19,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
     /**
-     * @Route("/create-task", name="task")
+     * @Route("/{id}/create-task", name="task")
      *
+     * @param Board $board
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Board $board, Request $request): Response
     {
         // creates a new_task object and initializes some data for this example
         $task = new Task();
@@ -31,19 +33,19 @@ class TaskController extends AbstractController
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $task = $form->getData();
-
+            $task->setBoard($board);
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
             $this->addFlash('success', 'Task created');
-            return $this->redirect('/create-task');
+            return $this->redirectToRoute('showBoard', ['id' => $task->getBoard()->getId()]);
         }
 
         return $this->render('new_task/new.html.twig', [
             'form' => $form->createView(),
+            'boardID' => $board->getId(),
 
         ]);
     }
