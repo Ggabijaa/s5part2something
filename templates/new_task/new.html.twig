@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <form style="width: 30%; margin: 0 auto;">
         {{ form_start(form) }}
         {# form_row(form.title, {label_attr: {class: 'radio-custom'} }) #}

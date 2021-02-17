@@ -35,8 +35,8 @@ class CategoryController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
-
-            return $this->redirect('/');
+            $this->addFlash('success', 'Category created');
+            return $this->redirect('/create-category');
         }
 
         $categories = $categoryRepository->findAll();

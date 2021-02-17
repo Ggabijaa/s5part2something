@@ -19,12 +19,31 @@ class BoardController extends AbstractController
      */
     public function showBoard(int $id, BoardRepository $boardRepository)
     {
-        $board = $boardRepository->findOneBy(['id' => $id ]);
+        $board = $boardRepository->findOneBy(['id' => $id]);
 
         return $this->render('tasks/show.html.twig', [
             'board' => $board,
         ]);
     }
+
+    /**
+     * @param Task $task
+     * @Route("/delete-task/{id}", name="deleteTask")
+     */
+    public function removeTask(Task $task)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($task);
+        $em->flush();
+        $boardID = $task->getBoard();
+        $this->addFlash('success', 'Task removed');
+        return $this->render('tasks/show.html.twig', [
+            'board' => $boardID,
+        ]);//kaip nrml redirectint
+    }
+
+
+
 }
 
 
