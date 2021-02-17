@@ -14,6 +14,10 @@ class HomePageController extends AbstractController
 {
     /**
      * @Route("/{userId}/boards", name="home_page")
+     * @param int $userId
+     * @param BoardRepository $boardRepository
+     * @param OwnerRepository $ownerRepository
+     * @return Response
      */
     public function showBoard(int $userId, BoardRepository $boardRepository, OwnerRepository $ownerRepository)
     {
