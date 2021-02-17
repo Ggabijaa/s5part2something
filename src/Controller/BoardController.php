@@ -6,8 +6,11 @@ namespace App\Controller;
 
 use App\Entity\Board;
 use App\Entity\Task;
+use App\Form\BoardType;
+use App\Form\EditBoardType;
 use App\Repository\BoardRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +18,10 @@ class BoardController extends AbstractController
 {
 
     /**
-     * @Route("/board/{id}")
+     * @Route("/board/{id}", name="showBoard")
+     * @param int $id
+     * @param BoardRepository $boardRepository
+     * @return Response
      */
     public function showBoard(int $id, BoardRepository $boardRepository)
     {
@@ -42,8 +48,30 @@ class BoardController extends AbstractController
         ]);//kaip nrml redirectint
     }
 
+    /**
+     * @param Request $request
+     * @param Board $board
+     * @return Response
+     * @Route("/edit-board/{id}", name="editBoard")
+     */
+    public function editBoard(Request $request, Board $board): Response
+    {
+        $form = $this->createForm(EditBoardType::class, $board);
 
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Board edited');
+
+            return $this->redirectToRoute('showBoard', ['id' => $board->getId()]);
+
+        }
+
+        return $this->render('edit_board/show.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
 
 
