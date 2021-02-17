@@ -38,8 +38,8 @@ class TaskController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
-
-            return $this->redirect('/');
+            $this->addFlash('success', 'Task created');
+            return $this->redirect('/create-task');
         }
 
         return $this->render('new_task/new.html.twig', [

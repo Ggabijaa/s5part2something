@@ -25,12 +25,6 @@ class BoardType extends AbstractType
                 'multiple' => true,
                // 'expanded' => true,
             ])
-            ->add('tasks', EntityType::class, [
-                'class' => Task::class,
-                'multiple' => true,
-                //'expanded' => true,
-                'choice_label' => 'title'
-            ])
             ->add('save', SubmitType::class, ['label' => 'Create Board'])
             ->setMethod('GET')
             ->getForm();

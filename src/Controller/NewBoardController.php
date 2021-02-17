@@ -32,8 +32,8 @@ class NewBoardController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($board);
             $em->flush();
-
-            return $this->redirect('/');
+            $this->addFlash('success', 'Board created');
+            return $this->redirect('/create-board');
         }
 
         return $this->render('new_board/new.html.twig', [
