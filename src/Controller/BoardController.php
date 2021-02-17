@@ -33,22 +33,6 @@ class BoardController extends AbstractController
     }
 
     /**
-     * @param Task $task
-     * @Route("/delete-task/{id}", name="deleteTask")
-     */
-    public function removeTask(Task $task)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($task);
-        $em->flush();
-        $boardID = $task->getBoard();
-        $this->addFlash('success', 'Task removed');
-        return $this->render('tasks/show.html.twig', [
-            'board' => $boardID,
-        ]);//kaip nrml redirectint
-    }
-
-    /**
      * @param Request $request
      * @param Board $board
      * @return Response
