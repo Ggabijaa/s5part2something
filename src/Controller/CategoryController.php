@@ -46,4 +46,45 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param Category $category
+     * @param CategoryRepository $categoryRepository
+     * @return Response
+     * @Route("/edit-category/{id}", name="EditCategory")
+     */
+    public function editCategory(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    {
+        $form = $this->createForm(CategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Task edited');
+
+            return $this->redirect('/create-category');
+
+        }
+
+        return $this->render('category/new.html.twig', [
+            'form' => $form->createView(),
+            'categories' => $categoryRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @param Category $category
+     * @return Response
+     * @Route("/delete-category/{id}", name="deleteCategory")
+     */
+    public function removeCategory(Category $category)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($category);
+        $em->flush();
+        $this->addFlash('success', 'Category removed');
+        return $this->redirect('/create-category');
+    }
 }
