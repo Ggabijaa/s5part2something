@@ -17,12 +17,11 @@ class HomePageController extends AbstractController
      */
     public function showBoard(int $userId, BoardRepository $boardRepository, OwnerRepository $ownerRepository)
     {
-        $board = $boardRepository->findBy( ['id' => $userId]);
         $owner = $ownerRepository->findOneBy(['id' => $userId]);
-
+        $boards = $owner->getBoards();
         $owner->getName();
         return $this->render('home_page/boards.html.twig', [
-            'boards' => $board,
+            'boards' => $boards,
             'users' => $owner
         ]);
     }
