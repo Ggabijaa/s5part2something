@@ -27,10 +27,10 @@ class TaskType extends AbstractType
                 'class' => Owner::class,
                 'choice_label' => 'name',
             ])
-            ->add('board', EntityType::class, [
-                'class' => Board::class,
-                'choice_label' => 'name',
-            ])
+//            ->add('board', EntityType::class, [
+//                'class' => Board::class,
+//                'choice_label' => 'name',
+//            ])
             ->add('status', ChoiceType::class, [
                 'choices' => [
                     Task::STATUS_NOT_STARTED => Task::STATUS_NOT_STARTED,
