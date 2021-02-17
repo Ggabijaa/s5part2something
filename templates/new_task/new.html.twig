@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% block title %} Create New Task {% endblock %}
+
 {% block body %}
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">

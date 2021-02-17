@@ -33,7 +33,8 @@ class NewBoardController extends AbstractController
             $em->persist($board);
             $em->flush();
             $this->addFlash('success', 'Board created');
-            return $this->redirect('/create-board');
+            return $this->redirectToRoute('showBoard', ['id' => $board->getId()]);
+
         }
 
         return $this->render('new_board/new.html.twig', [
