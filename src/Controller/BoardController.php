@@ -42,8 +42,13 @@ class BoardController extends AbstractController
         ]);//kaip nrml redirectint
     }
 
-
-
+    /**
+     * @param Task $task
+     * @Route("/edit-task/{id}", name="editTask")
+     */
+    public function editTask(Task $task){
+        $em = $this->getDoctrine()->getManager();
+    }
 }
 
 
