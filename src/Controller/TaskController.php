@@ -48,4 +48,29 @@ class TaskController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Task $task
+     * @return Response
+     * @Route("/edit-task/{id}", name="EditTask")
+     */
+    public function editTask(Request $request, Task $task): Response
+    {
+        $form = $this->createForm(TaskType::class, $task);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Task edited');
+
+            return $this->redirectToRoute('showBoard', ['id' => $task->getBoard()->getId()]);
+
+        }
+
+        return $this->render('edit_task/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 }

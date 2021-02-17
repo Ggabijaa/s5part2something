@@ -15,7 +15,7 @@ class EditBoardType extends AbstractType
         $builder
             ->add('name')
             ->add('users')
-            ->add('save', SubmitType::class, ['label' => 'Done'])
+            ->add('save', SubmitType::class, ['label' => 'Save'])
             ->getForm();;
         ;
     }
